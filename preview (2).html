@@ -1,0 +1,2467 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <meta
+    name="description"
+    content="Renuka Devi — Data Engineer, Data Analyst and Technical Trainer specializing in data engineering, analytics, cloud and technical training."
+  />
+  <meta name="author" content="Renuka Devi" />
+  <meta name="theme-color" content="#0a0a0a" />
+
+  <title>Renuka Devi | Data Engineer • Data Analyst • Technical Trainer</title>
+
+  <!-- Lucide Icons CDN -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+
+  <style>
+    /* =========================================================
+       BASE
+    ========================================================= */
+
+    :root {
+      --bg: #08090a;
+      --bg-soft: #0d0f11;
+      --surface: #111417;
+      --surface-2: #15191d;
+      --border: #24292e;
+      --border-light: #30363d;
+
+      --text: #f2f4f5;
+      --text-soft: #b6bdc5;
+      --text-muted: #7d8791;
+
+      --accent: #d7ff45;
+      --accent-soft: rgba(215, 255, 69, 0.1);
+
+      --max-width: 1180px;
+      --nav-height: 76px;
+
+      --radius-sm: 8px;
+      --radius-md: 14px;
+      --radius-lg: 20px;
+
+      --shadow: 0 20px 60px rgba(0, 0, 0, 0.25);
+
+      --ease: cubic-bezier(0.22, 1, 0.36, 1);
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      scroll-padding-top: 100px;
+    }
+
+    body {
+      min-height: 100vh;
+      background: var(--bg);
+      color: var(--text);
+      font-family:
+        Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont,
+        "Segoe UI", sans-serif;
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    body::selection {
+      background: var(--accent);
+      color: #08090a;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    button,
+    a {
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    button {
+      font: inherit;
+    }
+
+    img {
+      max-width: 100%;
+      display: block;
+    }
+
+    ul {
+      list-style: none;
+    }
+
+    .container {
+      width: min(var(--max-width), calc(100% - 40px));
+      margin-inline: auto;
+    }
+
+    .section {
+      padding: 110px 0;
+      position: relative;
+    }
+
+    .section-header {
+      max-width: 720px;
+      margin-bottom: 54px;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 9px;
+      color: var(--accent);
+      font-size: 0.76rem;
+      font-weight: 700;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      margin-bottom: 15px;
+    }
+
+    .eyebrow::before {
+      content: "";
+      width: 26px;
+      height: 1px;
+      background: var(--accent);
+    }
+
+    .section-title {
+      font-size: clamp(2rem, 4vw, 3.4rem);
+      line-height: 1.05;
+      letter-spacing: -0.045em;
+      font-weight: 750;
+    }
+
+    .section-description {
+      color: var(--text-soft);
+      margin-top: 18px;
+      max-width: 640px;
+      font-size: 1rem;
+    }
+
+    .accent {
+      color: var(--accent);
+    }
+
+    .muted {
+      color: var(--text-muted);
+    }
+
+    .divider {
+      height: 1px;
+      background: var(--border);
+    }
+
+    /* =========================================================
+       BUTTONS
+    ========================================================= */
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 9px;
+      min-height: 48px;
+      padding: 0 20px;
+      border: 1px solid transparent;
+      border-radius: 9px;
+      font-size: 0.9rem;
+      font-weight: 700;
+      transition:
+        transform 180ms var(--ease),
+        background 180ms ease,
+        border-color 180ms ease,
+        color 180ms ease;
+      cursor: pointer;
+    }
+
+    .btn:hover {
+      transform: translateY(-2px);
+    }
+
+    .btn:focus-visible,
+    .nav-link:focus-visible,
+    .social-link:focus-visible,
+    .back-top:focus-visible {
+      outline: 2px solid var(--accent);
+      outline-offset: 4px;
+    }
+
+    .btn-primary {
+      background: var(--accent);
+      color: #08090a;
+    }
+
+    .btn-primary:hover {
+      background: #e4ff75;
+    }
+
+    .btn-secondary {
+      background: transparent;
+      color: var(--text);
+      border-color: var(--border-light);
+    }
+
+    .btn-secondary:hover {
+      border-color: var(--text-soft);
+      background: var(--surface);
+    }
+
+    .btn-small {
+      min-height: 40px;
+      padding: 0 14px;
+      font-size: 0.8rem;
+    }
+
+    /* =========================================================
+       NAVBAR
+    ========================================================= */
+
+    .navbar {
+      position: fixed;
+      inset: 0 0 auto;
+      z-index: 1000;
+      height: var(--nav-height);
+      background: rgba(8, 9, 10, 0.9);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+    }
+
+    .nav-inner {
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .brand {
+      display: inline-flex;
+      align-items: center;
+      gap: 11px;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+    }
+
+    .brand-mark {
+      width: 35px;
+      height: 35px;
+      display: grid;
+      place-items: center;
+      border: 1px solid var(--border-light);
+      border-radius: 9px;
+      font-size: 0.8rem;
+      color: var(--accent);
+      background: var(--surface);
+    }
+
+    .brand-name {
+      font-size: 0.98rem;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
+
+    .nav-link {
+      position: relative;
+      padding: 9px 11px;
+      color: var(--text-muted);
+      font-size: 0.8rem;
+      font-weight: 600;
+      transition: color 180ms ease;
+    }
+
+    .nav-link::after {
+      content: "";
+      position: absolute;
+      left: 11px;
+      right: 11px;
+      bottom: 3px;
+      height: 1px;
+      background: var(--accent);
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform 180ms var(--ease);
+    }
+
+    .nav-link:hover,
+    .nav-link.active {
+      color: var(--text);
+    }
+
+    .nav-link.active::after {
+      transform: scaleX(1);
+    }
+
+    .menu-toggle {
+      display: none;
+      width: 42px;
+      height: 42px;
+      border: 1px solid var(--border);
+      border-radius: 9px;
+      background: var(--surface);
+      color: var(--text);
+      cursor: pointer;
+      place-items: center;
+    }
+
+    /* =========================================================
+       HERO
+    ========================================================= */
+
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      padding: calc(var(--nav-height) + 60px) 0 80px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero::before {
+      content: "";
+      position: absolute;
+      width: 520px;
+      height: 520px;
+      right: -300px;
+      top: 10%;
+      border: 1px solid rgba(215, 255, 69, 0.08);
+      border-radius: 50%;
+      pointer-events: none;
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      align-items: center;
+      gap: 70px;
+    }
+
+    .status {
+      display: inline-flex;
+      align-items: center;
+      gap: 9px;
+      padding: 7px 11px;
+      border: 1px solid var(--border);
+      border-radius: 100px;
+      background: var(--surface);
+      color: var(--text-soft);
+      font-size: 0.74rem;
+      margin-bottom: 25px;
+    }
+
+    .status-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: var(--accent);
+      box-shadow: 0 0 0 4px rgba(215, 255, 69, 0.08);
+    }
+
+    .hero h1 {
+      max-width: 800px;
+      font-size: clamp(3rem, 7vw, 6.5rem);
+      line-height: 0.94;
+      letter-spacing: -0.065em;
+      font-weight: 800;
+    }
+
+    .hero-subtitle {
+      margin-top: 25px;
+      color: var(--text-soft);
+      font-size: clamp(1rem, 2vw, 1.2rem);
+      max-width: 650px;
+    }
+
+    .hero-meta {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 14px 22px;
+      margin-top: 20px;
+      color: var(--text-muted);
+      font-size: 0.82rem;
+    }
+
+    .hero-meta span {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 32px;
+    }
+
+    .social-links {
+      display: flex;
+      align-items: center;
+      gap: 9px;
+      margin-top: 25px;
+    }
+
+    .social-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      color: var(--text-muted);
+      font-size: 0.8rem;
+      transition: color 180ms ease;
+    }
+
+    .social-link:hover {
+      color: var(--text);
+    }
+
+    .hero-terminal {
+      width: 100%;
+      max-width: 500px;
+      margin-left: auto;
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      background: #0b0d0f;
+      box-shadow: var(--shadow);
+      overflow: hidden;
+    }
+
+    .terminal-head {
+      height: 45px;
+      padding: 0 15px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-bottom: 1px solid var(--border);
+      background: var(--surface);
+    }
+
+    .terminal-dots {
+      display: flex;
+      gap: 6px;
+    }
+
+    .terminal-dots span {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: #3a4046;
+    }
+
+    .terminal-title {
+      color: var(--text-muted);
+      font-size: 0.68rem;
+      font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+    }
+
+    .terminal-body {
+      padding: 28px;
+      font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+      font-size: 0.78rem;
+      line-height: 2;
+      color: var(--text-soft);
+    }
+
+    .code-line {
+      display: block;
+    }
+
+    .code-number {
+      display: inline-block;
+      width: 28px;
+      color: #3f464d;
+      user-select: none;
+    }
+
+    .code-key {
+      color: var(--accent);
+    }
+
+    .code-value {
+      color: #d6dae0;
+    }
+
+    .code-comment {
+      color: #596169;
+    }
+
+    .pipeline {
+      margin-top: 20px;
+      padding: 14px;
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      background: var(--surface);
+    }
+
+    .pipeline-flow {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+    }
+
+    .pipeline-node {
+      flex: 1;
+      min-width: 0;
+      padding: 10px 7px;
+      border: 1px solid var(--border-light);
+      border-radius: 7px;
+      text-align: center;
+      color: var(--text-soft);
+      font-size: 0.65rem;
+    }
+
+    .pipeline-node strong {
+      display: block;
+      color: var(--text);
+      margin-bottom: 2px;
+      font-size: 0.7rem;
+    }
+
+    .pipeline-arrow {
+      color: var(--accent);
+      font-size: 0.7rem;
+    }
+
+    /* =========================================================
+       ABOUT
+    ========================================================= */
+
+    .about-grid {
+      display: grid;
+      grid-template-columns: 0.8fr 1.2fr;
+      gap: 70px;
+      align-items: start;
+    }
+
+    .about-intro {
+      font-size: clamp(1.5rem, 3vw, 2.2rem);
+      line-height: 1.2;
+      letter-spacing: -0.035em;
+      font-weight: 650;
+    }
+
+    .about-copy {
+      color: var(--text-soft);
+      margin-top: 22px;
+      font-size: 0.98rem;
+    }
+
+    .about-copy + .about-copy {
+      margin-top: 15px;
+    }
+
+    .about-facts {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 12px;
+      margin-top: 32px;
+    }
+
+    .fact {
+      padding: 18px;
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      background: var(--surface);
+    }
+
+    .fact strong {
+      display: block;
+      font-size: 0.86rem;
+      margin-bottom: 3px;
+    }
+
+    .fact span {
+      color: var(--text-muted);
+      font-size: 0.75rem;
+    }
+
+    /* =========================================================
+       SKILLS
+    ========================================================= */
+
+    .skills-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 12px;
+    }
+
+    .skill-card {
+      padding: 20px;
+      min-height: 125px;
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      background: var(--surface);
+      transition:
+        transform 200ms var(--ease),
+        border-color 200ms ease,
+        background 200ms ease;
+    }
+
+    .skill-card:hover {
+      transform: translateY(-4px);
+      border-color: var(--border-light);
+      background: var(--surface-2);
+    }
+
+    .skill-icon {
+      width: 34px;
+      height: 34px;
+      display: grid;
+      place-items: center;
+      border-radius: 8px;
+      background: var(--accent-soft);
+      color: var(--accent);
+      margin-bottom: 15px;
+    }
+
+    .skill-card h3 {
+      font-size: 0.9rem;
+      margin-bottom: 4px;
+    }
+
+    .skill-card p {
+      color: var(--text-muted);
+      font-size: 0.72rem;
+    }
+
+    /* =========================================================
+       EXPERIENCE
+    ========================================================= */
+
+    .experience-list {
+      border-top: 1px solid var(--border);
+    }
+
+    .experience-item {
+      display: grid;
+      grid-template-columns: 180px 1fr;
+      gap: 40px;
+      padding: 38px 0;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .experience-period {
+      color: var(--text-muted);
+      font-size: 0.76rem;
+      padding-top: 5px;
+    }
+
+    .experience-content h3 {
+      font-size: 1.3rem;
+      letter-spacing: -0.025em;
+    }
+
+    .experience-content .role-meta {
+      margin-top: 5px;
+      color: var(--accent);
+      font-size: 0.76rem;
+      font-weight: 600;
+    }
+
+    .experience-content ul {
+      margin-top: 18px;
+      display: grid;
+      gap: 8px;
+    }
+
+    .experience-content li {
+      position: relative;
+      padding-left: 19px;
+      color: var(--text-soft);
+      font-size: 0.88rem;
+    }
+
+    .experience-content li::before {
+      content: "→";
+      position: absolute;
+      left: 0;
+      color: var(--accent);
+    }
+
+    /* =========================================================
+       PROJECTS
+    ========================================================= */
+
+    .projects-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 16px;
+    }
+
+    .project-card {
+      display: flex;
+      flex-direction: column;
+      min-height: 330px;
+      padding: 25px;
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      background: var(--surface);
+      transition:
+        transform 220ms var(--ease),
+        border-color 220ms ease,
+        background 220ms ease;
+    }
+
+    .project-card:hover {
+      transform: translateY(-6px);
+      border-color: var(--border-light);
+      background: var(--surface-2);
+    }
+
+    .project-top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 15px;
+    }
+
+    .project-number {
+      color: var(--accent);
+      font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+      font-size: 0.72rem;
+    }
+
+    .project-icon {
+      color: var(--text-muted);
+    }
+
+    .project-card h3 {
+      margin-top: 45px;
+      font-size: 1.3rem;
+      letter-spacing: -0.025em;
+    }
+
+    .project-card p {
+      color: var(--text-soft);
+      font-size: 0.83rem;
+      margin-top: 10px;
+      max-width: 540px;
+    }
+
+    .tech-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 7px;
+      margin-top: 20px;
+    }
+
+    .tech {
+      padding: 5px 9px;
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      color: var(--text-muted);
+      font-size: 0.67rem;
+    }
+
+    .project-footer {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-top: auto;
+      padding-top: 25px;
+    }
+
+    /* =========================================================
+       CERTIFICATIONS
+    ========================================================= */
+
+    .cert-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 12px;
+    }
+
+    .cert-card {
+      display: flex;
+      align-items: center;
+      gap: 18px;
+      padding: 22px;
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      background: var(--surface);
+      transition:
+        border-color 180ms ease,
+        transform 180ms var(--ease);
+    }
+
+    .cert-card:hover {
+      border-color: var(--border-light);
+      transform: translateY(-3px);
+    }
+
+    .cert-icon {
+      flex: 0 0 auto;
+      width: 43px;
+      height: 43px;
+      display: grid;
+      place-items: center;
+      border-radius: 10px;
+      background: var(--accent-soft);
+      color: var(--accent);
+    }
+
+    .cert-card h3 {
+      font-size: 0.9rem;
+    }
+
+    .cert-card p {
+      margin-top: 3px;
+      color: var(--text-muted);
+      font-size: 0.7rem;
+    }
+
+    /* =========================================================
+       EDUCATION
+    ========================================================= */
+
+    .education-card {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 30px;
+      align-items: center;
+      padding: 34px;
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      background: var(--surface);
+    }
+
+    .education-card h3 {
+      font-size: clamp(1.3rem, 3vw, 2rem);
+      letter-spacing: -0.035em;
+    }
+
+    .education-card p {
+      color: var(--text-soft);
+      margin-top: 7px;
+      font-size: 0.88rem;
+    }
+
+    .education-meta {
+      text-align: right;
+    }
+
+    .education-meta strong {
+      display: block;
+      color: var(--accent);
+      font-size: 1.4rem;
+    }
+
+    .education-meta span {
+      color: var(--text-muted);
+      font-size: 0.72rem;
+    }
+
+    /* =========================================================
+       WHAT I DO
+    ========================================================= */
+
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 12px;
+    }
+
+    .service {
+      min-height: 220px;
+      padding: 25px;
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      background: var(--surface);
+      transition:
+        transform 200ms var(--ease),
+        border-color 200ms ease;
+    }
+
+    .service:hover {
+      transform: translateY(-5px);
+      border-color: var(--border-light);
+    }
+
+    .service-icon {
+      color: var(--accent);
+      margin-bottom: 45px;
+    }
+
+    .service h3 {
+      font-size: 1rem;
+    }
+
+    .service p {
+      margin-top: 7px;
+      color: var(--text-muted);
+      font-size: 0.76rem;
+    }
+
+    /* =========================================================
+       CONTACT
+    ========================================================= */
+
+    .contact-box {
+      position: relative;
+      overflow: hidden;
+      padding: 65px;
+      border: 1px solid var(--border);
+      border-radius: 24px;
+      background: var(--surface);
+    }
+
+    .contact-box::after {
+      content: "";
+      position: absolute;
+      right: -80px;
+      bottom: -100px;
+      width: 260px;
+      height: 260px;
+      border: 1px solid rgba(215, 255, 69, 0.08);
+      border-radius: 50%;
+      pointer-events: none;
+    }
+
+    .contact-box h2 {
+      max-width: 760px;
+      font-size: clamp(2.3rem, 6vw, 5rem);
+      line-height: 0.98;
+      letter-spacing: -0.055em;
+    }
+
+    .contact-box > p {
+      max-width: 600px;
+      margin-top: 20px;
+      color: var(--text-soft);
+    }
+
+    .contact-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 15px;
+      margin-top: 38px;
+      max-width: 750px;
+    }
+
+    .contact-item {
+      display: flex;
+      align-items: center;
+      gap: 13px;
+      padding: 15px;
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      background: rgba(0, 0, 0, 0.12);
+    }
+
+    .contact-item svg {
+      flex: 0 0 auto;
+      color: var(--accent);
+    }
+
+    .contact-item span {
+      color: var(--text-muted);
+      font-size: 0.7rem;
+      display: block;
+    }
+
+    .contact-item strong {
+      display: block;
+      font-size: 0.82rem;
+      margin-top: 1px;
+    }
+
+    /* =========================================================
+       FOOTER
+    ========================================================= */
+
+    footer {
+      padding: 30px 0;
+      border-top: 1px solid var(--border);
+    }
+
+    .footer-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+    }
+
+    .footer-copy {
+      color: var(--text-muted);
+      font-size: 0.72rem;
+    }
+
+    .footer-links {
+      display: flex;
+      gap: 18px;
+    }
+
+    .footer-links a {
+      color: var(--text-muted);
+      font-size: 0.72rem;
+      transition: color 180ms ease;
+    }
+
+    .footer-links a:hover {
+      color: var(--text);
+    }
+
+    /* =========================================================
+       BACK TO TOP
+    ========================================================= */
+
+    .back-top {
+      position: fixed;
+      right: 22px;
+      bottom: 22px;
+      z-index: 900;
+      width: 44px;
+      height: 44px;
+      display: grid;
+      place-items: center;
+      border: 1px solid var(--border-light);
+      border-radius: 10px;
+      background: var(--surface);
+      color: var(--text);
+      cursor: pointer;
+      opacity: 0;
+      visibility: hidden;
+      transform: translateY(10px);
+      transition:
+        opacity 180ms ease,
+        visibility 180ms ease,
+        transform 180ms var(--ease);
+    }
+
+    .back-top.visible {
+      opacity: 1;
+      visibility: visible;
+      transform: translateY(0);
+    }
+
+    .back-top:hover {
+      border-color: var(--accent);
+      color: var(--accent);
+    }
+
+    /* =========================================================
+       SCROLL REVEAL
+    ========================================================= */
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(24px);
+      transition:
+        opacity 700ms var(--ease),
+        transform 700ms var(--ease);
+    }
+
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* =========================================================
+       RESPONSIVE
+    ========================================================= */
+
+    @media (max-width: 1050px) {
+      .nav-links {
+        gap: 0;
+      }
+
+      .nav-link {
+        padding-inline: 8px;
+      }
+
+      .hero-grid {
+        grid-template-columns: 1fr;
+        gap: 55px;
+      }
+
+      .hero-terminal {
+        margin-left: 0;
+      }
+
+      .skills-grid,
+      .services-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .about-grid {
+        grid-template-columns: 1fr;
+        gap: 35px;
+      }
+    }
+
+    @media (max-width: 760px) {
+      :root {
+        --nav-height: 68px;
+      }
+
+      .container {
+        width: min(var(--max-width), calc(100% - 28px));
+      }
+
+      .section {
+        padding: 80px 0;
+      }
+
+      .navbar {
+        height: var(--nav-height);
+      }
+
+      .menu-toggle {
+        display: grid;
+      }
+
+      .nav-links {
+        position: absolute;
+        top: calc(var(--nav-height) + 8px);
+        left: 14px;
+        right: 14px;
+        display: flex;
+        flex-direction: column;
+        align-items: stretch;
+        padding: 10px;
+        border: 1px solid var(--border);
+        border-radius: 13px;
+        background: rgba(13, 15, 17, 0.98);
+        box-shadow: var(--shadow);
+        opacity: 0;
+        visibility: hidden;
+        transform: translateY(-8px);
+        transition:
+          opacity 180ms ease,
+          visibility 180ms ease,
+          transform 180ms var(--ease);
+      }
+
+      .nav-links.open {
+        opacity: 1;
+        visibility: visible;
+        transform: translateY(0);
+      }
+
+      .nav-link {
+        padding: 13px;
+        border-radius: 7px;
+      }
+
+      .nav-link:hover,
+      .nav-link.active {
+        background: var(--surface);
+      }
+
+      .nav-link::after {
+        display: none;
+      }
+
+      .hero {
+        padding-top: calc(var(--nav-height) + 45px);
+      }
+
+      .hero h1 {
+        font-size: clamp(3rem, 14vw, 5rem);
+      }
+
+      .hero-terminal {
+        max-width: 100%;
+      }
+
+      .pipeline-flow {
+        flex-wrap: wrap;
+      }
+
+      .pipeline-node {
+        min-width: 29%;
+      }
+
+      .pipeline-arrow {
+        display: none;
+      }
+
+      .skills-grid,
+      .services-grid,
+      .projects-grid,
+      .cert-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .experience-item {
+        grid-template-columns: 1fr;
+        gap: 8px;
+        padding: 30px 0;
+      }
+
+      .experience-period {
+        padding-top: 0;
+      }
+
+      .education-card {
+        grid-template-columns: 1fr;
+        padding: 25px;
+      }
+
+      .education-meta {
+        text-align: left;
+      }
+
+      .contact-box {
+        padding: 35px 24px;
+      }
+
+      .contact-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .footer-inner {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+    }
+
+    @media (max-width: 450px) {
+      .hero-actions {
+        flex-direction: column;
+        align-items: stretch;
+      }
+
+      .hero-actions .btn {
+        width: 100%;
+      }
+
+      .about-facts {
+        grid-template-columns: 1fr;
+      }
+
+      .terminal-body {
+        padding: 20px 15px;
+        font-size: 0.68rem;
+      }
+
+      .pipeline-node {
+        min-width: 100%;
+      }
+
+      .project-card {
+        min-height: 360px;
+      }
+
+      .contact-box h2 {
+        font-size: 2.7rem;
+      }
+    }
+
+    /* =========================================================
+       REDUCED MOTION
+    ========================================================= */
+
+    @media (prefers-reduced-motion: reduce) {
+      html {
+        scroll-behavior: auto;
+      }
+
+      *,
+      *::before,
+      *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+      }
+
+      .reveal {
+        opacity: 1;
+        transform: none;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- =========================================================
+       NAVBAR
+  ========================================================= -->
+
+  <header class="navbar">
+    <div class="container nav-inner">
+
+      <a href="#home" class="brand" aria-label="Renuka Devi home">
+        <span class="brand-mark">RD</span>
+        <span class="brand-name">Renuka Devi</span>
+      </a>
+
+      <nav class="nav-links" id="navLinks" aria-label="Primary navigation">
+        <a href="#about" class="nav-link">About</a>
+        <a href="#skills" class="nav-link">Skills</a>
+        <a href="#experience" class="nav-link">Experience</a>
+        <a href="#projects" class="nav-link">Projects</a>
+        <a href="#certifications" class="nav-link">Certifications</a>
+        <a href="#education" class="nav-link">Education</a>
+        <a href="#contact" class="nav-link">Contact</a>
+      </nav>
+
+      <button
+        class="menu-toggle"
+        id="menuToggle"
+        type="button"
+        aria-label="Open navigation menu"
+        aria-expanded="false"
+        aria-controls="navLinks"
+      >
+        <i data-lucide="menu"></i>
+      </button>
+
+    </div>
+  </header>
+
+
+  <!-- =========================================================
+       HERO
+  ========================================================= -->
+
+  <main>
+
+    <section class="hero" id="home">
+      <div class="container hero-grid">
+
+        <div class="hero-content reveal">
+
+          <div class="status">
+            <span class="status-dot"></span>
+            Open to opportunities & collaborations
+          </div>
+
+          <h1>
+            Building Data Pipelines.
+            <span class="accent">Turning Data Into Decisions.</span>
+          </h1>
+
+          <p class="hero-subtitle">
+            I'm <strong>Renuka Devi</strong> — a Data Engineer, Data Analyst
+            and Technical Trainer focused on building reliable data solutions,
+            practical analytics workflows and useful technology.
+          </p>
+
+          <div class="hero-meta">
+            <span>
+              <i data-lucide="briefcase" size="15"></i>
+              Data Engineer · Data Analyst · Technical Trainer
+            </span>
+
+            <span>
+              <i data-lucide="map-pin" size="15"></i>
+              Tamil Nadu, India
+            </span>
+          </div>
+
+          <div class="hero-actions">
+            <a href="#projects" class="btn btn-primary">
+              View Projects
+              <i data-lucide="arrow-up-right" size="17"></i>
+            </a>
+
+            <a href="#contact" class="btn btn-secondary">
+              Contact Me
+              <i data-lucide="mail" size="17"></i>
+            </a>
+          </div>
+
+          <div class="social-links">
+            <!-- Replace these URLs with your real profiles -->
+            <a
+              href="https://github.com/yourusername"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="social-link"
+              aria-label="GitHub profile"
+            >
+              <i data-lucide="github" size="16"></i>
+              GitHub
+            </a>
+
+            <a
+              href="https://www.linkedin.com/in/yourusername"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="social-link"
+              aria-label="LinkedIn profile"
+            >
+              <i data-lucide="linkedin" size="16"></i>
+              LinkedIn
+            </a>
+          </div>
+
+        </div>
+
+
+        <div class="hero-terminal reveal">
+
+          <div class="terminal-head">
+            <div class="terminal-dots">
+              <span></span>
+              <span></span>
+              <span></span>
+            </div>
+
+            <span class="terminal-title">data_pipeline.py</span>
+          </div>
+
+          <div class="terminal-body">
+
+            <span class="code-line">
+              <span class="code-number">01</span>
+              <span class="code-comment"># Build. Transform. Analyze.</span>
+            </span>
+
+            <span class="code-line">
+              <span class="code-number">02</span>
+              <span class="code-key">source</span> =
+              <span class="code-value">"raw_data"</span>
+            </span>
+
+            <span class="code-line">
+              <span class="code-number">03</span>
+              <span class="code-key">data</span> =
+              <span class="code-value">extract(source)</span>
+            </span>
+
+            <span class="code-line">
+              <span class="code-number">04</span>
+              <span class="code-key">clean</span> =
+              <span class="code-value">transform(data)</span>
+            </span>
+
+            <span class="code-line">
+              <span class="code-number">05</span>
+              <span class="code-key">insights</span> =
+              <span class="code-value">analyze(clean)</span>
+            </span>
+
+            <span class="code-line">
+              <span class="code-number">06</span>
+              <span class="code-comment"># Reliable data → useful decisions</span>
+            </span>
+
+
+            <div class="pipeline">
+              <div class="pipeline-flow">
+
+                <div class="pipeline-node">
+                  <strong>INGEST</strong>
+                  AWS / APIs
+                </div>
+
+                <span class="pipeline-arrow">→</span>
+
+                <div class="pipeline-node">
+                  <strong>PROCESS</strong>
+                  Python / Spark
+                </div>
+
+                <span class="pipeline-arrow">→</span>
+
+                <div class="pipeline-node">
+                  <strong>STORE</strong>
+                  Cloud / DW
+                </div>
+
+                <span class="pipeline-arrow">→</span>
+
+                <div class="pipeline-node">
+                  <strong>INSIGHT</strong>
+                  Analytics
+                </div>
+
+              </div>
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+
+    <!-- =========================================================
+         ABOUT
+    ========================================================= -->
+
+    <section class="section" id="about">
+      <div class="container">
+
+        <div class="section-header reveal">
+          <div class="eyebrow">About Me</div>
+          <h2 class="section-title">
+            Engineering data with purpose.
+          </h2>
+        </div>
+
+        <div class="about-grid">
+
+          <div class="reveal">
+            <p class="about-intro">
+              I enjoy turning messy data and complex technical problems into
+              systems that are <span class="accent">simple, reliable and useful.</span>
+            </p>
+          </div>
+
+          <div class="reveal">
+
+            <p class="about-copy">
+              I'm a technology professional working across data engineering,
+              analytics, cloud technologies and technical training. My focus is
+              not just on writing code, but on understanding the problem behind
+              the data and building solutions that can actually be used.
+            </p>
+
+            <p class="about-copy">
+              I work with tools such as Python, SQL, Pandas, PySpark, AWS,
+              Azure, Snowflake and Databricks to build data workflows,
+              analytical solutions and practical learning experiences.
+            </p>
+
+            <div class="about-facts">
+
+              <div class="fact">
+                <strong>Data Engineering</strong>
+                <span>Pipelines · ETL · Cloud</span>
+              </div>
+
+              <div class="fact">
+                <strong>Analytics</strong>
+                <span>Cleaning · EDA · Insights</span>
+              </div>
+
+              <div class="fact">
+                <strong>Technical Training</strong>
+                <span>Hands-on learning</span>
+              </div>
+
+              <div class="fact">
+                <strong>Problem Solving</strong>
+                <span>Practical engineering mindset</span>
+              </div>
+
+            </div>
+
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+
+    <!-- =========================================================
+         SKILLS
+    ========================================================= -->
+
+    <section class="section" id="skills">
+      <div class="container">
+
+        <div class="section-header reveal">
+          <div class="eyebrow">Technical Stack</div>
+          <h2 class="section-title">Tools I build with.</h2>
+          <p class="section-description">
+            A practical stack spanning programming, data engineering,
+            analytics, cloud and machine learning.
+          </p>
+        </div>
+
+        <div class="skills-grid">
+
+          <div class="skill-card reveal">
+            <div class="skill-icon"><i data-lucide="code-2" size="18"></i></div>
+            <h3>Python</h3>
+            <p>Automation · Analytics · ML</p>
+          </div>
+
+          <div class="skill-card reveal">
+            <div class="skill-icon"><i data-lucide="database" size="18"></i></div>
+            <h3>SQL</h3>
+            <p>Queries · Joins · Data modeling</p>
+          </div>
+
+          <div class="skill-card reveal">
+            <div class="skill-icon"><i data-lucide="table-2" size="18"></i></div>
+            <h3>Pandas</h3>
+            <p>Cleaning · Transformation · EDA</p>
+          </div>
+
+          <div class="skill-card reveal">
+            <div class="skill-icon"><i data-lucide="zap" size="18"></i></div>
+            <h3>PySpark</h3>
+            <p>Distributed data processing</p>
+          </div>
+
+          <div class="skill-card reveal">
+            <div class="skill-icon"><i data-lucide="cloud" size="18"></i></div>
+            <h3>AWS</h3>
+            <p>S3 · Lambda · Athena · Cloud</p>
+          </div>
+
+          <div class="skill-card reveal">
+            <div class="skill-icon"><i data-lucide="cloud-cog" size="18"></i></div>
+            <h3>Azure</h3>
+            <p>Data services · Cloud solutions</p>
+          </div>
+
+          <div class="skill-card reveal">
+            <div class="skill-icon"><i data-lucide="warehouse" size="18"></i></div>
+            <h3>Snowflake</h3>
+            <p>Data warehouse · Analytics</p>
+          </div>
+
+          <div class="skill-card reveal">
+            <div class="skill-icon"><i data-lucide="layers-3" size="18"></i></div>
+            <h3>Databricks</h3>
+            <p>Spark · Lakehouse · Data</p>
+          </div>
+
+          <div class="skill-card reveal">
+            <div class="skill-icon"><i data-lucide="container" size="18"></i></div>
+            <h3>Docker</h3>
+            <p>Containers · Deployment</p>
+          </div>
+
+          <div class="skill-card reveal">
+            <div class="skill-icon"><i data-lucide="boxes" size="18"></i></div>
+            <h3>Kubernetes</h3>
+            <p>Container orchestration</p>
+          </div>
+
+          <div class="skill-card reveal">
+            <div class="skill-icon"><i data-lucide="workflow" size="18"></i></div>
+            <h3>ETL / Data Pipelines</h3>
+            <p>Extract · Transform · Load</p>
+          </div>
+
+          <div class="skill-card reveal">
+            <div class="skill-icon"><i data-lucide="bar-chart-3" size="18"></i></div>
+            <h3>Data Analytics</h3>
+            <p>EDA · Reporting · Insights</p>
+          </div>
+
+          <div class="skill-card reveal">
+            <div class="skill-icon"><i data-lucide="brain" size="18"></i></div>
+            <h3>Machine Learning</h3>
+            <p>Modeling · Prediction · Evaluation</p>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+
+    <!-- =========================================================
+         EXPERIENCE
+    ========================================================= -->
+
+    <section class="section" id="experience">
+      <div class="container">
+
+        <div class="section-header reveal">
+          <div class="eyebrow">Experience</div>
+          <h2 class="section-title">Where I've been building.</h2>
+        </div>
+
+        <div class="experience-list">
+
+          <article class="experience-item reveal">
+            <div class="experience-period">Technical Training</div>
+
+            <div class="experience-content">
+              <h3>Technical Trainer</h3>
+              <div class="role-meta">
+                Engineering & Polytechnic Education
+              </div>
+
+              <ul>
+                <li>Teaching engineering and polytechnic students through practical, hands-on technical sessions.</li>
+                <li>Delivering training across programming, data, cloud and networking concepts.</li>
+                <li>Creating project-oriented learning experiences to bridge theory and real-world implementation.</li>
+              </ul>
+            </div>
+          </article>
+
+
+          <article class="experience-item reveal">
+            <div class="experience-period">Data & Analytics</div>
+
+            <div class="experience-content">
+              <h3>Data Analyst Trainee</h3>
+              <div class="role-meta">
+                Data Analytics & Reporting
+              </div>
+
+              <ul>
+                <li>Worked on data cleaning and preparation workflows using Python and analytical tools.</li>
+                <li>Performed data analysis to identify patterns, trends and actionable insights.</li>
+                <li>Supported reporting and analytics workflows for structured decision-making.</li>
+              </ul>
+            </div>
+          </article>
+
+
+          <article class="experience-item reveal">
+            <div class="experience-period">Project Work</div>
+
+            <div class="experience-content">
+              <h3>Engineering & Automation Projects</h3>
+              <div class="role-meta">
+                Data · Cloud · Analytics · Automation
+              </div>
+
+              <ul>
+                <li>Built and explored data engineering pipelines using cloud storage and processing technologies.</li>
+                <li>Worked across analytics, cloud infrastructure and data workflows.</li>
+                <li>Experimented with automation solutions to reduce repetitive technical tasks.</li>
+              </ul>
+            </div>
+          </article>
+
+        </div>
+      </div>
+    </section>
+
+
+    <!-- =========================================================
+         PROJECTS
+    ========================================================= -->
+
+    <section class="section" id="projects">
+      <div class="container">
+
+        <div class="section-header reveal">
+          <div class="eyebrow">Selected Work</div>
+          <h2 class="section-title">Projects that solve real problems.</h2>
+          <p class="section-description">
+            Replace the placeholder GitHub and demo URLs with your actual
+            repositories and deployed projects.
+          </p>
+        </div>
+
+        <div class="projects-grid">
+
+          <article class="project-card reveal">
+            <div class="project-top">
+              <span class="project-number">01 / DATA ENGINEERING</span>
+              <i data-lucide="database" class="project-icon"></i>
+            </div>
+
+            <h3>AWS Data Engineering Pipeline</h3>
+
+            <p>
+              Cloud-based pipeline for ingesting raw data, transforming it
+              into analytics-ready datasets and querying processed data.
+            </p>
+
+            <div class="tech-list">
+              <span class="tech">AWS S3</span>
+              <span class="tech">Lambda</span>
+              <span class="tech">Athena</span>
+              <span class="tech">Python</span>
+            </div>
+
+            <div class="project-footer">
+              <a
+                href="https://github.com/yourusername/aws-data-engineering-pipeline"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="btn btn-secondary btn-small"
+              >
+                <i data-lucide="github" size="15"></i>
+                GitHub
+              </a>
+
+              <a
+                href="https://your-demo-url.com/aws-pipeline"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="btn btn-secondary btn-small"
+              >
+                <i data-lucide="external-link" size="15"></i>
+                Live Demo
+              </a>
+            </div>
+          </article>
+
+
+          <article class="project-card reveal">
+            <div class="project-top">
+              <span class="project-number">02 / DATA WAREHOUSE</span>
+              <i data-lucide="warehouse" class="project-icon"></i>
+            </div>
+
+            <h3>Snowflake Data Warehouse</h3>
+
+            <p>
+              Structured analytical warehouse designed to transform source
+              data into reliable reporting and business-ready datasets.
+            </p>
+
+            <div class="tech-list">
+              <span class="tech">Snowflake</span>
+              <span class="tech">SQL</span>
+              <span class="tech">ETL</span>
+              <span class="tech">Data Modeling</span>
+            </div>
+
+            <div class="project-footer">
+              <a
+                href="https://github.com/yourusername/snowflake-data-warehouse"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="btn btn-secondary btn-small"
+              >
+                <i data-lucide="github" size="15"></i>
+                GitHub
+              </a>
+
+              <a
+                href="https://your-demo-url.com/snowflake"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="btn btn-secondary btn-small"
+              >
+                <i data-lucide="external-link" size="15"></i>
+                Live Demo
+              </a>
+            </div>
+          </article>
+
+
+          <article class="project-card reveal">
+            <div class="project-top">
+              <span class="project-number">03 / MACHINE LEARNING</span>
+              <i data-lucide="users-round" class="project-icon"></i>
+            </div>
+
+            <h3>Customer Churn Prediction</h3>
+
+            <p>
+              Machine learning workflow for preparing customer data,
+              identifying churn patterns and predicting customer retention risk.
+            </p>
+
+            <div class="tech-list">
+              <span class="tech">Python</span>
+              <span class="tech">Pandas</span>
+              <span class="tech">Scikit-learn</span>
+              <span class="tech">Logistic Regression</span>
+            </div>
+
+            <div class="project-footer">
+              <a
+                href="https://github.com/yourusername/customer-churn-prediction"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="btn btn-secondary btn-small"
+              >
+                <i data-lucide="github" size="15"></i>
+                GitHub
+              </a>
+
+              <a
+                href="https://your-demo-url.com/churn"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="btn btn-secondary btn-small"
+              >
+                <i data-lucide="external-link" size="15"></i>
+                Live Demo
+              </a>
+            </div>
+          </article>
+
+
+          <article class="project-card reveal">
+            <div class="project-top">
+              <span class="project-number">04 / ANALYTICS</span>
+              <i data-lucide="bar-chart-3" class="project-icon"></i>
+            </div>
+
+            <h3>Data Analytics Dashboard</h3>
+
+            <p>
+              Interactive analytical solution for exploring KPIs, trends and
+              business performance from structured datasets.
+            </p>
+
+            <div class="tech-list">
+              <span class="tech">Python</span>
+              <span class="tech">Pandas</span>
+              <span class="tech">SQL</span>
+              <span class="tech">Analytics</span>
+            </div>
+
+            <div class="project-footer">
+              <a
+                href="https://github.com/yourusername/data-analytics-dashboard"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="btn btn-secondary btn-small"
+              >
+                <i data-lucide="github" size="15"></i>
+                GitHub
+              </a>
+
+              <a
+                href="https://your-demo-url.com/dashboard"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="btn btn-secondary btn-small"
+              >
+                <i data-lucide="external-link" size="15"></i>
+                Live Demo
+              </a>
+            </div>
+          </article>
+
+
+          <article class="project-card reveal">
+            <div class="project-top">
+              <span class="project-number">05 / ETL</span>
+              <i data-lucide="workflow" class="project-icon"></i>
+            </div>
+
+            <h3>ETL Pipeline</h3>
+
+            <p>
+              End-to-end ETL workflow covering extraction, data validation,
+              transformation and loading into an analytics-ready destination.
+            </p>
+
+            <div class="tech-list">
+              <span class="tech">Python</span>
+              <span class="tech">Pandas</span>
+              <span class="tech">SQL</span>
+              <span class="tech">ETL</span>
+            </div>
+
+            <div class="project-footer">
+              <a
+                href="https://github.com/yourusername/etl-pipeline"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="btn btn-secondary btn-small"
+              >
+                <i data-lucide="github" size="15"></i>
+                GitHub
+              </a>
+
+              <a
+                href="https://your-demo-url.com/etl"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="btn btn-secondary btn-small"
+              >
+                <i data-lucide="external-link" size="15"></i>
+                Live Demo
+              </a>
+            </div>
+          </article>
+
+
+          <article class="project-card reveal">
+            <div class="project-top">
+              <span class="project-number">06 / MACHINE LEARNING</span>
+              <i data-lucide="brain" class="project-icon"></i>
+            </div>
+
+            <h3>Machine Learning Projects</h3>
+
+            <p>
+              Collection of practical machine learning experiments covering
+              data preparation, feature engineering, model training and evaluation.
+            </p>
+
+            <div class="tech-list">
+              <span class="tech">Python</span>
+              <span class="tech">Pandas</span>
+              <span class="tech">Scikit-learn</span>
+              <span class="tech">ML</span>
+            </div>
+
+            <div class="project-footer">
+              <a
+                href="https://github.com/yourusername/machine-learning-projects"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="btn btn-secondary btn-small"
+              >
+                <i data-lucide="github" size="15"></i>
+                GitHub
+              </a>
+
+              <a
+                href="https://your-demo-url.com/ml"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="btn btn-secondary btn-small"
+              >
+                <i data-lucide="external-link" size="15"></i>
+                Live Demo
+              </a>
+            </div>
+          </article>
+
+        </div>
+      </div>
+    </section>
+
+
+    <!-- =========================================================
+         CERTIFICATIONS
+    ========================================================= -->
+
+    <section class="section" id="certifications">
+      <div class="container">
+
+        <div class="section-header reveal">
+          <div class="eyebrow">Certifications</div>
+          <h2 class="section-title">Continuous learning.</h2>
+        </div>
+
+        <div class="cert-grid">
+
+          <article class="cert-card reveal">
+            <div class="cert-icon">
+              <i data-lucide="award" size="20"></i>
+            </div>
+            <div>
+              <h3>Google Cloud Data Analytics Certificate</h3>
+              <p>Google Cloud</p>
+            </div>
+          </article>
+
+          <article class="cert-card reveal">
+            <div class="cert-icon">
+              <i data-lucide="layers-3" size="20"></i>
+            </div>
+            <div>
+              <h3>Databricks Fundamentals Accreditation</h3>
+              <p>Databricks</p>
+            </div>
+          </article>
+
+          <article class="cert-card reveal">
+            <div class="cert-icon">
+              <i data-lucide="brain-circuit" size="20"></i>
+            </div>
+            <div>
+              <h3>Oracle Cloud Infrastructure AI Foundation</h3>
+              <p>Oracle Cloud Infrastructure</p>
+            </div>
+          </article>
+
+          <article class="cert-card reveal">
+            <div class="cert-icon">
+              <i data-lucide="cloud" size="20"></i>
+            </div>
+            <div>
+              <h3>Microsoft Azure Data Fundamentals</h3>
+              <p>Microsoft</p>
+            </div>
+          </article>
+
+        </div>
+      </div>
+    </section>
+
+
+    <!-- =========================================================
+         EDUCATION
+    ========================================================= -->
+
+    <section class="section" id="education">
+      <div class="container">
+
+        <div class="section-header reveal">
+          <div class="eyebrow">Education</div>
+          <h2 class="section-title">The foundation.</h2>
+        </div>
+
+        <div class="education-card reveal">
+
+          <div>
+            <h3>M.A.M College of Engineering and Technology</h3>
+            <p>
+              Engineering Graduate · 2022
+            </p>
+          </div>
+
+          <div class="education-meta">
+            <strong>7.39</strong>
+            <span>CGPA</span>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+
+    <!-- =========================================================
+         WHAT I DO
+    ========================================================= -->
+
+    <section class="section" id="services">
+      <div class="container">
+
+        <div class="section-header reveal">
+          <div class="eyebrow">What I Do</div>
+          <h2 class="section-title">From raw data to real outcomes.</h2>
+        </div>
+
+        <div class="services-grid">
+
+          <article class="service reveal">
+            <div class="service-icon">
+              <i data-lucide="database-zap" size="25"></i>
+            </div>
+            <h3>Data Engineering</h3>
+            <p>
+              Build structured data pipelines, ETL workflows and reliable
+              data foundations for analytics.
+            </p>
+          </article>
+
+          <article class="service reveal">
+            <div class="service-icon">
+              <i data-lucide="chart-no-axes-combined" size="25"></i>
+            </div>
+            <h3>Data Analytics</h3>
+            <p>
+              Turn raw datasets into meaningful analysis, patterns,
+              metrics and decision-ready insights.
+            </p>
+          </article>
+
+          <article class="service reveal">
+            <div class="service-icon">
+              <i data-lucide="cloud-cog" size="25"></i>
+            </div>
+            <h3>Cloud Data Solutions</h3>
+            <p>
+              Design practical cloud-based data workflows using modern
+              storage, processing and warehouse technologies.
+            </p>
+          </article>
+
+          <article class="service reveal">
+            <div class="service-icon">
+              <i data-lucide="presentation" size="25"></i>
+            </div>
+            <h3>Technical Training</h3>
+            <p>
+              Teach technical concepts through hands-on projects,
+              practical examples and real engineering workflows.
+            </p>
+          </article>
+
+        </div>
+      </div>
+    </section>
+
+
+    <!-- =========================================================
+         CONTACT
+    ========================================================= -->
+
+    <section class="section" id="contact">
+      <div class="container">
+
+        <div class="contact-box reveal">
+
+          <div class="eyebrow">Get In Touch</div>
+
+          <h2>
+            Have data to move?
+            <span class="accent">Let's build something useful.</span>
+          </h2>
+
+          <p>
+            Whether it's a data engineering project, analytics problem,
+            cloud solution or technical training requirement, let's talk.
+          </p>
+
+          <div class="contact-grid">
+
+            <!-- Replace email with your actual email -->
+            <a
+              href="mailto:renukadevi@example.com"
+              class="contact-item"
+            >
+              <i data-lucide="mail" size="19"></i>
+              <div>
+                <span>Email</span>
+                <strong>renukadevi@example.com</strong>
+              </div>
+            </a>
+
+            <a
+              href="https://github.com/yourusername"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="contact-item"
+            >
+              <i data-lucide="github" size="19"></i>
+              <div>
+                <span>GitHub</span>
+                <strong>github.com/yourusername</strong>
+              </div>
+            </a>
+
+            <a
+              href="https://www.linkedin.com/in/yourusername"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="contact-item"
+            >
+              <i data-lucide="linkedin" size="19"></i>
+              <div>
+                <span>LinkedIn</span>
+                <strong>linkedin.com/in/yourusername</strong>
+              </div>
+            </a>
+
+            <div class="contact-item">
+              <i data-lucide="map-pin" size="19"></i>
+              <div>
+                <span>Location</span>
+                <strong>Tamil Nadu, India</strong>
+              </div>
+            </div>
+
+          </div>
+
+          <div class="hero-actions">
+            <a
+              href="mailto:renukadevi@example.com"
+              class="btn btn-primary"
+            >
+              Start a Conversation
+              <i data-lucide="arrow-up-right" size="17"></i>
+            </a>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+  </main>
+
+
+  <!-- =========================================================
+       FOOTER
+  ========================================================= -->
+
+  <footer>
+    <div class="container footer-inner">
+
+      <p class="footer-copy">
+        © <span id="year"></span> Renuka Devi. Built with HTML, CSS & JavaScript.
+      </p>
+
+      <div class="footer-links">
+        <a href="#home">Back to top</a>
+        <a href="#projects">Projects</a>
+        <a href="#contact">Contact</a>
+      </div>
+
+    </div>
+  </footer>
+
+
+  <!-- =========================================================
+       BACK TO TOP
+  ========================================================= -->
+
+  <button
+    class="back-top"
+    id="backTop"
+    type="button"
+    aria-label="Back to top"
+  >
+    <i data-lucide="arrow-up" size="18"></i>
+  </button>
+
+
+  <!-- =========================================================
+       JAVASCRIPT
+  ========================================================= -->
+
+  <script>
+    /* Initialize Lucide icons */
+    lucide.createIcons();
+
+    /* ---------------------------------------------------------
+       YEAR
+    --------------------------------------------------------- */
+
+    document.getElementById("year").textContent = new Date().getFullYear();
+
+
+    /* ---------------------------------------------------------
+       MOBILE NAVIGATION
+    --------------------------------------------------------- */
+
+    const menuToggle = document.getElementById("menuToggle");
+    const navLinks = document.getElementById("navLinks");
+
+    function closeMenu() {
+      navLinks.classList.remove("open");
+      menuToggle.setAttribute("aria-expanded", "false");
+
+      const icon = menuToggle.querySelector("svg");
+
+      if (icon) {
+        icon.outerHTML = '<i data-lucide="menu"></i>';
+        lucide.createIcons();
+      }
+    }
+
+    menuToggle.addEventListener("click", () => {
+      const isOpen = navLinks.classList.toggle("open");
+
+      menuToggle.setAttribute(
+        "aria-expanded",
+        String(isOpen)
+      );
+
+      const icon = menuToggle.querySelector("svg");
+
+      if (icon) {
+        icon.outerHTML = isOpen
+          ? '<i data-lucide="x"></i>'
+          : '<i data-lucide="menu"></i>';
+
+        lucide.createIcons();
+      }
+    });
+
+    navLinks.querySelectorAll("a").forEach((link) => {
+      link.addEventListener("click", closeMenu);
+    });
+
+
+    /* ---------------------------------------------------------
+       SCROLL REVEAL
+    --------------------------------------------------------- */
+
+    const revealElements = document.querySelectorAll(".reveal");
+
+    const prefersReducedMotion =
+      window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+    if (prefersReducedMotion) {
+      revealElements.forEach((element) => {
+        element.classList.add("visible");
+      });
+    } else {
+      const revealObserver = new IntersectionObserver(
+        (entries, observer) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add("visible");
+              observer.unobserve(entry.target);
+            }
+          });
+        },
+        {
+          threshold: 0.12,
+          rootMargin: "0px 0px -40px 0px"
+        }
+      );
+
+      revealElements.forEach((element) => {
+        revealObserver.observe(element);
+      });
+    }
+
+
+    /* ---------------------------------------------------------
+       ACTIVE NAVIGATION
+    --------------------------------------------------------- */
+
+    const sections = document.querySelectorAll("main section[id]");
+    const navigationLinks = document.querySelectorAll(".nav-link");
+
+    const sectionObserver = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            navigationLinks.forEach((link) => {
+              link.classList.remove("active");
+
+              if (
+                link.getAttribute("href") ===
+                `#${entry.target.id}`
+              ) {
+                link.classList.add("active");
+              }
+            });
+          }
+        });
+      },
+      {
+        rootMargin: "-30% 0px -60% 0px"
+      }
+    );
+
+    sections.forEach((section) => {
+      sectionObserver.observe(section);
+    });
+
+
+    /* ---------------------------------------------------------
+       BACK TO TOP
+    --------------------------------------------------------- */
+
+    const backTop = document.getElementById("backTop");
+
+    window.addEventListener(
+      "scroll",
+      () => {
+        if (window.scrollY > 600) {
+          backTop.classList.add("visible");
+        } else {
+          backTop.classList.remove("visible");
+        }
+      },
+      { passive: true }
+    );
+
+    backTop.addEventListener("click", () => {
+      window.scrollTo({
+        top: 0,
+        behavior: prefersReducedMotion ? "auto" : "smooth"
+      });
+    });
+
+
+    /* ---------------------------------------------------------
+       ESCAPE KEY — CLOSE MOBILE MENU
+    --------------------------------------------------------- */
+
+    document.addEventListener("keydown", (event) => {
+      if (event.key === "Escape" && navLinks.classList.contains("open")) {
+        closeMenu();
+        menuToggle.focus();
+      }
+    });
+  </script>
+
+</body>
+</html>
